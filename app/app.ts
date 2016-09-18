@@ -3,7 +3,7 @@ import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { Page1 } from './pages/page1/page1';
-import {PageAccounts} from './pages/accounts/accounts';
+import {AccountsComponent} from './pages/accounts/accounts.component';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -21,7 +21,7 @@ class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Dashboard', component: Page1 },
-      { title: 'Accounts', component: PageAccounts },
+      { title: 'Accounts', component: AccountsComponent },
 
     ];
 

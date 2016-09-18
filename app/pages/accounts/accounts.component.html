@@ -8,12 +8,15 @@
 </ion-header>
 
 <ion-content>
+
+  <button primary (click)="addAccount()">add Account</button>
+
+
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
+    <button ion-item *ngFor="let account of accounts" (click)="itemTapped($event, account)">
+      {{account.title}}
       <div class="item-note" item-right>
-        {{item.note}}
+        {{account.id}}
       </div>
     </button>
   </ion-list>
