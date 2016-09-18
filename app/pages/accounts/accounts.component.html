@@ -1,26 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Accounts</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Accounts</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <button primary (click)="addAccount()">add Account</button>
+    <button secondary fab fab-right fab-bottom (click)="addAccount()"><ion-icon name="add-circle"></ion-icon></button>
 
+    <ion-list>
 
-  <ion-list>
-    <button ion-item *ngFor="let account of accounts" (click)="itemTapped($event, account)">
-      {{account.title}}
-      <div class="item-note" item-right>
-        {{account.id}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+        <ion-item-sliding *ngFor="let account of accounts">
+            <ion-item>
+                {{account.title}}
+            </ion-item>
+            <ion-item-options side="right">
+                <button primary>
+                    <ion-icon name="create"></ion-icon>
+                    Bearbeiten
+                </button>
+                <button danger (click)="delete(account)">
+                    <ion-icon name="trash"></ion-icon>
+                    Löschen
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+    <div *ngIf="selectedItem" padding>
+        You navigated here from <b>{{selectedItem.title}}</b>
+    </div>
 </ion-content>
