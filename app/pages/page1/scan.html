@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>FastLogin</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+    <h2>Scan Result</h2>
+
+    <ion-list-header>QRCode Result</ion-list-header>
+    <ion-item>
+        {{ barcodeData.text }}
+    </ion-item>
+    <ion-list-header>Format</ion-list-header>
+    <ion-item>
+        {{ barcodeData.format }}
+    </ion-item>
+
+</ion-content>
