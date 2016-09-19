@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+
+        <ion-title>Account: Facebook</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form class="list" [formGroup]="accountFrm" (ngSubmit)="logForm()" novalidate>
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-buttons>
+            <button type="submit" block >Speichern</button>
+        </ion-buttons>
+    </form>
+</ion-content>

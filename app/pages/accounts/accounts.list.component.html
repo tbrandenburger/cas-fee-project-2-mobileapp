@@ -8,11 +8,7 @@
 </ion-header>
 
 <ion-content>
-
-    <button secondary fab fab-right fab-bottom (click)="addAccount()"><ion-icon name="add-circle"></ion-icon></button>
-
     <ion-list>
-
         <ion-item-sliding *ngFor="let account of accounts">
             <ion-item>
                 {{account.title}}
@@ -33,4 +29,6 @@
     <div *ngIf="selectedItem" padding>
         You navigated here from <b>{{selectedItem.title}}</b>
     </div>
+
+    <button secondary fab fab-right fab-bottom (click)="addAccount()"><ion-icon name="add-circle"></ion-icon></button>
 </ion-content>
