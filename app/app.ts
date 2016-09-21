@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
-import { Page1 } from './pages/page1/page1';
 import {AccountsListComponent} from './pages/accounts/accounts.list.component';
+import {HomeComponent} from './pages/home/home.component';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -11,7 +11,7 @@ import {AccountsListComponent} from './pages/accounts/accounts.list.component';
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Page1;
+  rootPage: any = HomeComponent;
 
   pages: Array<{title: string, component: any}>;
 
@@ -20,7 +20,7 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Dashboard', component: Page1 },
+      { title: 'Dashboard', component: HomeComponent },
       { title: 'Accounts', component: AccountsListComponent },
 
     ];

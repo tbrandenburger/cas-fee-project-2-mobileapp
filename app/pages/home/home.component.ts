@@ -5,9 +5,9 @@ import {QRcodeData} from './QRcodeData';
 import {ScanPage} from './scan';
 
 @Component({
-  templateUrl: 'build/pages/page1/page1.html'
+  templateUrl: 'build/pages/home/home.component.html'
 })
-export class Page1 {
+export class HomeComponent {
 
     qrData:String = 'no data';
     qrFormat:String = 'no data';
@@ -35,7 +35,7 @@ export class Page1 {
     }
 
     scanDummy() {
-        const qrcodeData = new QRcodeData("testdata", "result.format");
+        const qrcodeData = new QRcodeData("tesdtdata", "result.format");
         this.scanDetails(qrcodeData);
     }
 }
