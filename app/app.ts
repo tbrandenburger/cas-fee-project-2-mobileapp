@@ -11,7 +11,7 @@ import {HomeComponent} from './pages/home/home.component';
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomeComponent;
+  rootPage: any = AccountsListComponent;
 
   pages: Array<{title: string, component: any}>;
 

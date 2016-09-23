@@ -34,6 +34,7 @@ export class HomeComponent {
         });
     }
 
+
     scanDummy() {
         const qrcodeData = new QRcodeData("tesdtdata", "result.format");
         this.scanDetails(qrcodeData);
