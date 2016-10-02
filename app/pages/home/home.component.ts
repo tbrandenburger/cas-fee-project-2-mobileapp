@@ -3,6 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import {BarcodeScanner} from 'ionic-native';
 import {QRcodeData} from './QRcodeData';
 import {ScanPage} from './scan';
+import * as CryptoJS from 'crypto-js';
+import {AppDataProvider} from '../../providers/app.data.provider';
 
 @Component({
   templateUrl: 'build/pages/home/home.component.html'
@@ -11,9 +13,25 @@ export class HomeComponent {
 
     qrData:String = 'no data';
     qrFormat:String = 'no data';
+    secretKey = 'your-secret-key';
 
-    constructor(private navCtrl:NavController, navParams: NavParams) {
+    constructor(
+        private navCtrl:NavController,
+        private navParams: NavParams,
+        private appDataProvider:AppDataProvider
+        ) {
 
+        console.log(appDataProvider.masterPassword)
+
+        // Encrypt
+        var encryptedData = CryptoJS.AES.encrypt("hans", this.secretKey).toString();
+        console.log(encryptedData);
+
+        // Decyrpt
+        var bytes  = CryptoJS.AES.decrypt(encryptedData.toString(), this.secretKey);
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+        console.log(plaintext);
     }
 
     scan() {

@@ -1,14 +1,12 @@
 export class Account {
-    title: string;
-    text: string;
+    id: number;
+    sitename: string;
     username: string;
     password: string;
-    id: number;
 
-    constructor(title: string, text: string, id: number, username: string = '', password: string = '') {
-        this.title = title;
-        this.text = text;
+    constructor(id: number = null, sitename: string = null, username: string = null, password: string = null) {
         this.id = id;
+        this.sitename = sitename;
         this.username = username;
         this.password = password;
     }

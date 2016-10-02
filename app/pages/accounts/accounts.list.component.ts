@@ -32,7 +32,7 @@ export class AccountsListComponent {
                 if (data.res.rows.length > 0) {
                     for (var i = 0; i < data.res.rows.length; i++) {
                         let item = data.res.rows.item(i);
-                        this.accounts.push(new Account(item.title, item.text, item.id));
+                        this.accounts.push(new Account(item.id, item.sitename, item.username, item.password));
                     }
 
                 }
@@ -43,28 +43,22 @@ export class AccountsListComponent {
         let modal = this.modalCtrl.create(AccountComponent);
         modal.present();
 
-        let account = new Account('test3', 'asdfasdf', 55, 'test', 'paswd');
-
-
-        this.accountService.saveAccount(account).then((data) => {
-            // Set the automatic created id to our note
-            console.log(data.res["insertId"]);
-            this.loadAccounts();
-        });
     }
 
     deleteAccount(account:Account) {
         console.log("delete");
         this.accountService.removeAccount(account);
-        this.accounts.slice(5, 1);
+
+        this.loadAccounts();
+        
         let toast = this.toastCtrl.create({
-            message: 'Account: "' + account.title + '" wurde erfolgreich gelöscht.',
-            duration: 3000,
+            message: 'Account: "' + account.sitename + '" wurde erfolgreich gelöscht.',
+            duration: 1000,
             position: 'bottom'
         });
 
         toast.onDidDismiss(() => {
-            console.log('Dismissed toast');
+
         });
 
         toast.present();

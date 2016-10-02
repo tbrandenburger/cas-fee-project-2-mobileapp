@@ -10,7 +10,7 @@ export class AccountsService {
     // Init an empty DB if it does not exist by now!
     constructor() {
         this.storage = new Storage(SqlStorage);
-        this.storage.query('CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, text TEXT)');
+        this.storage.query('CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY AUTOINCREMENT, sitename TEXT, username TEXT, password TEXT)');
     }
 
     // Get all accounts from DB
@@ -20,13 +20,13 @@ export class AccountsService {
 
     // Save a new account to the DB
     public saveAccount(account: Account) {
-        let sql = 'INSERT INTO accounts (title, text) VALUES (?,?)';
-        return this.storage.query(sql, [account.title, account.text]);
+        let sql = 'INSERT INTO accounts (sitename, username, password) VALUES (?,?,?)';
+        return this.storage.query(sql, [account.sitename, account.username, account.password]);
     }
 
     // Update an existing account with a given ID
     public updateAccount(account: Account) {
-        let sql = 'UPDATE accounts SET title = \"' + account.title + '\", text = \"' + account.text + '\" WHERE id = \"' + account.id + '\"';
+        let sql = 'UPDATE accounts SET sitename = \"' + account.sitename + '\", username = \"' + account.username + '\", password = \"' + account.password + '\" WHERE id = \"' + account.id + '\"';
         this.storage.query(sql);
     }
 

@@ -4,6 +4,7 @@ import { StatusBar } from 'ionic-native';
 
 import {AccountsListComponent} from './pages/accounts/accounts.list.component';
 import {HomeComponent} from './pages/home/home.component';
+import {AppDataProvider} from './providers/app.data.provider';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -42,4 +43,4 @@ class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp, [AppDataProvider]);

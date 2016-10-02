@@ -1,4 +1,4 @@
-import {beforeEachProviders, it, describe, expect, inject} from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import {AccountsService} from './accounts.service';
 
 describe('Accounts Service', () => {
