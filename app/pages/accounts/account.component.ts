@@ -1,18 +1,18 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController} from 'ionic-angular';
 import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup} from '@angular/forms';
-import {AccountsService} from './accounts.service';
+import {AccountsService} from '../../providers/accounts.service';
 import {Account} from './account';
 import {Validators} from '@angular/common';
 import * as CryptoJS from 'crypto-js';
 import {AppDataProvider} from '../../providers/app.data.provider';
 
 
-
 @Component({
     templateUrl: 'build/pages/accounts/account.component.html',
-    providers: [AccountsService],
+    providers: [AccountsService]
 })
+
 export class AccountComponent {
 
     accountFrm: FormGroup;
@@ -21,6 +21,7 @@ export class AccountComponent {
                 private appDataProvider:AppDataProvider,
                 private accountService:AccountsService,
                 private viewCtrl: ViewController) {
+
         this.accountFrm = formBuilder.group({
             'username': [
                 '',

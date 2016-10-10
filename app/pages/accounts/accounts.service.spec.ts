@@ -1,5 +1,5 @@
 import { TestBed, async, inject } from '@angular/core/testing';
-import {AccountsService} from './accounts.service';
+import {AccountsService} from '../../providers/accounts.service';
 
 describe('Accounts Service', () => {
 

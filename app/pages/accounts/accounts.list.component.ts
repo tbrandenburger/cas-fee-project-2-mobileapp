@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, ModalController, ToastController} from 'ionic-angular';
-import {AccountsService} from './accounts.service';
+import {AccountsService} from '../../providers/accounts.service';
 import {Account} from './account';
 import {AccountComponent} from './account.component';
 
 @Component({
     templateUrl: 'build/pages/accounts/accounts.list.component.html',
-    providers: [AccountsService, ]
+    providers: [AccountsService]
 })
 export class AccountsListComponent {
     selectedItem: any;
@@ -32,7 +32,7 @@ export class AccountsListComponent {
                 if (data.res.rows.length > 0) {
                     for (var i = 0; i < data.res.rows.length; i++) {
                         let item = data.res.rows.item(i);
-                        this.accounts.push(new Account(item.id, item.sitename, item.username, item.password));
+                        this.accounts.push(new Account(item.id, item.sitetitle, item.username, item.password));
                     }
 
                 }
@@ -52,7 +52,7 @@ export class AccountsListComponent {
         this.loadAccounts();
         
         let toast = this.toastCtrl.create({
-            message: 'Account: "' + account.sitename + '" wurde erfolgreich gelöscht.',
+            message: 'Account: "' + account.sitetitle + '" wurde erfolgreich gelöscht.',
             duration: 1000,
             position: 'bottom'
         });
@@ -73,7 +73,7 @@ export class AccountsListComponent {
 
     //
     private onPageDidEnter() {
-        console.log("page enterr");
+        console.log("page enter");
         this.loadAccounts();
     }
 }

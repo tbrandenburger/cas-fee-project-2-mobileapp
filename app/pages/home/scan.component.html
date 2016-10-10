@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>FastLogin</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+    <h5>Login at:</h5>
+    <h3>{{barcodeData.accounttitle}}</h3>
+
+    <ion-card-header>
+        <div *ngIf="accountFound">Account found, you are ready to login.</div>
+        <div *ngIf="!accountFound">Account not found, please enter your correct Account username and password.</div>
+    </ion-card-header>
+
+    <ion-card-content>
+
+        <form class="list" [formGroup]="loginFrm" (ngSubmit)="login()" novalidate>
+            <ion-item>
+                <ion-label floating>Username</ion-label>
+                <ion-input type="text" formControlName="username" value="{{username}}"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="password"  value="{{password}}"></ion-input>
+            </ion-item>
+            <ion-buttons>
+                <button type="submit" block >Login</button>
+            </ion-buttons>
+        </form>
+
+    </ion-card-content>
+
+
+</ion-content>

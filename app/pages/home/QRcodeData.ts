@@ -1,6 +1,7 @@
 export class QRcodeData {
     constructor(
-        public text: String,
-        public format: String
+        public siteid: string,
+        public sitetitle: string,
+        public channelid: string
     ) {}
 }
