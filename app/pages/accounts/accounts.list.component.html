@@ -11,10 +11,15 @@
     <ion-list>
         <ion-item-sliding *ngFor="let account of accounts">
             <ion-item>
-                {{account.username}}
+                <ion-avatar item-left>
+                    <img src="{{account.profileimg}}">
+                </ion-avatar>
+                <h2>{{account.sitetitle}}</h2>
+                <h3>Username: {{account.username}}</h3>
+                <!--<p>description</p>-->
             </ion-item>
             <ion-item-options side="right">
-                <button primary>
+                <button primary (click)="editAccount(account)">
                     <ion-icon name="create"></ion-icon>
                     Bearbeiten
                 </button>
@@ -26,9 +31,4 @@
         </ion-item-sliding>
 
     </ion-list>
-    <div *ngIf="selectedItem" padding>
-        You navigated here from <b>{{selectedItem.title}}</b>
-    </div>
-
-    <button secondary fab fab-right fab-bottom (click)="addAccount()"><ion-icon name="add-circle"></ion-icon></button>
 </ion-content>

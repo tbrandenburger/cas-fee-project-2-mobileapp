@@ -6,7 +6,11 @@
 </ion-header>
 
 <ion-content>
-    <form class="list" [formGroup]="accountFrm" (ngSubmit)="logForm()" novalidate>
+    <form class="list" [formGroup]="accountFrm" (ngSubmit)="save()" novalidate>
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" formControlName="sitetitle"></ion-input>
+        </ion-item>
         <ion-item>
             <ion-label floating>Username</ion-label>
             <ion-input type="text" formControlName="username"></ion-input>

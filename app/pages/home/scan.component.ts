@@ -33,11 +33,11 @@ export class ScanComponent {
         this.loginFrm = formBuilder.group({
             'username': [
                 '',
-                [Validators.required, Validators.minLength(5)]
+                [Validators.required, Validators.minLength(2)]
             ],
             'password': [
                 '',
-                [Validators.required, Validators.minLength(5)]
+                [Validators.required, Validators.minLength(2)]
             ]
         });
 
@@ -54,7 +54,6 @@ export class ScanComponent {
                         let item = data.res.rows.item(i);
                         this.username = item.username;
 
-                        console.log("pwd"+item.username)
                         // Decrypt Password
                         var bytes = CryptoJS.AES.decrypt(item.password.toString(), this.appDataProvider.masterPassword);
                         var decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
@@ -63,7 +62,7 @@ export class ScanComponent {
 
                     }
                 } else {
-                    console.log("no account");
+                    console.log('no account');
 
                 }
             });
@@ -77,7 +76,9 @@ export class ScanComponent {
             let encryptedPassword = CryptoJS.AES.encrypt(this.loginFrm.value.password, this.appDataProvider.masterPassword).toString();
 
             // Create new Account Object
-            let newAccount:Account = new Account(null, this.barcodeData.siteid, this.barcodeData.sitetitle, this.loginFrm.value.username, encryptedPassword)
+            let newAccount:Account = new Account(null, this.barcodeData.siteid, this.barcodeData.sitetitle, this.loginFrm.value.username, encryptedPassword);
+
+            console.log(newAccount);
 
             this.accountService.saveAccount(newAccount).then((data) => {
                 this.pushLogin();

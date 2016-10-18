@@ -19,13 +19,13 @@ export class MasterpasswordService {
     }
 
     public setMasterPasswordCheck() {
-        let encryptedMPCheck = CryptoJS.AES.encrypt("mpOK", this.appDataProvider.masterPassword).toString();
+        let encryptedMPCheck = CryptoJS.AES.encrypt('mpOK', this.appDataProvider.masterPassword).toString();
         let sql = 'INSERT INTO general (mpcheck) VALUES (?)';
         return this.storage.query(sql, [encryptedMPCheck]);
     }
 
     public updateMasterPasswordCheck() {
-        let encryptedMPCheck = CryptoJS.AES.encrypt("mpOK", this.appDataProvider.masterPassword).toString();
+        let encryptedMPCheck = CryptoJS.AES.encrypt('mpOK', this.appDataProvider.masterPassword).toString();
         let sql = 'UPDATE general SET mpcheck = \"' + encryptedMPCheck + '\"';
         this.storage.query(sql);
     }

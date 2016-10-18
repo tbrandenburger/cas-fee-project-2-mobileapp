@@ -27,7 +27,7 @@ export class AccountsService {
     // Update an existing account with a given ID
     public updateAccount(account: Account) {
         let sql = 'UPDATE accounts SET sitetitle = \"' + account.sitetitle + '\", username = \"' + account.username + '\", password = \"' + account.password + '\" WHERE id = \"' + account.id + '\"';
-        this.storage.query(sql);
+        return this.storage.query(sql);
     }
 
     // Remove an account with a given ID

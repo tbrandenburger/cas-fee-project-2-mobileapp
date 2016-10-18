@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AppDataProvider {
 
-    public masterPassword = ""; // Temporary stores the User Master key to unlock the Account Passwords. It'll be cleared after closing the app.
+    public masterPassword = ''; // Temporary stores the User Master key to unlock the Account Passwords. It'll be cleared after closing the app.
 
     constructor(private http: Http) {
 

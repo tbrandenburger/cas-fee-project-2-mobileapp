@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Platform} from 'ionic-angular';
 import {BarcodeScanner} from 'ionic-native';
 import {QRcodeData} from './QRcodeData';
 import {ScanComponent} from './scan.component';
@@ -17,19 +17,9 @@ export class HomeComponent {
 
     constructor(private navCtrl: NavController,
                 private navParams: NavParams,
-                private appDataProvider: AppDataProvider) {
+                private appDataProvider: AppDataProvider,
+                private platform: Platform) {
 
-        console.log(appDataProvider.masterPassword)
-
-        // Encrypt
-        var encryptedData = CryptoJS.AES.encrypt("hans", this.appDataProvider.masterPassword).toString();
-        console.log(encryptedData);
-
-        // Decyrpt
-        var bytes = CryptoJS.AES.decrypt(encryptedData.toString(), this.appDataProvider.masterPassword);
-        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-        console.log(plaintext);
     }
 
     onPageWillEnter() {
@@ -37,25 +27,21 @@ export class HomeComponent {
     }
 
     onPageDidEnter() {
-        console.log("master:" + this.appDataProvider.masterPassword)
+        //
     }
 
     checkMasterPassword() {
-        if (this.appDataProvider.masterPassword == "") {
+        if (this.appDataProvider.masterPassword == '') {
             this.navCtrl.push(MasterPasswordPage, {});
         }
     }
 
     scan() {
-        BarcodeScanner.scan().then((result) => {
-            if (!result.cancelled) {
-                /*const qrcodeData = new QRcodeData(result.text, result.format);
-                this.scanDetails(qrcodeData);*/
-            }
-        })
-            .catch((err) => {
-                alert(err);
-            })
+        if (this.platform.is('core')) {
+            this.scanDummy();
+        } else {
+            this.scanQRCode();
+        }
     }
 
     scanDetails(qrcodeData) {
@@ -64,14 +50,26 @@ export class HomeComponent {
         });
     }
 
+    scanQRCode() {
+        BarcodeScanner.scan().then((result) => {
+            if (!result.cancelled) {
+                let qrJson = JSON.parse(result.text);
+                const qrcodeData = new QRcodeData(qrJson.siteid, qrJson.sitetitle, qrJson.channelid);
+                this.scanDetails(qrcodeData);
+            }
+        })
+            .catch((err) => {
+                alert(err);
+            })
+    }
 
     scanDummy() {
         const testCode = {
-            siteid: "1234",
-            channelid: "OOIUOJ-LKJOI-LKJOI",
-            accounttitle: "FastLogin Test Account"
+            siteid: '12345',
+            channelid: 'OOIUOJ-LKJOI-LKJOI2',
+            sitetitle: 'FastLogin Test2 Account'
         }
-        const qrcodeData = new QRcodeData(testCode.siteid, testCode.accounttitle, testCode.channelid);
+        const qrcodeData = new QRcodeData(testCode.siteid, testCode.sitetitle, testCode.channelid);
         this.scanDetails(qrcodeData);
     }
 }

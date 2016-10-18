@@ -23,7 +23,6 @@ export class MasterPasswordPage {
                 private appDataProvider:AppDataProvider,
                 private viewCtrl: ViewController,
                 private masterpasswordService: MasterpasswordService) {
-        console.log("masterpassword");
 
         this.mpFrm = formBuilder.group({
             'masterpassword': [
@@ -57,7 +56,7 @@ export class MasterPasswordPage {
                             var decryptedMPCheck = bytes.toString(CryptoJS.enc.Utf8);
 
                             console.log(decryptedMPCheck);
-                            if (decryptedMPCheck == "mpOK") {
+                            if (decryptedMPCheck == 'mpOK') {
                                 this.isCorrect = true;
                                 this.viewCtrl.dismiss()
                             } else {
@@ -67,7 +66,7 @@ export class MasterPasswordPage {
                     } else {
                         this.masterpasswordService.setMasterPasswordCheck().then((data) => {
                             // Set the automatic created id to our note
-                            console.log(data.res["insertId"]);
+                            console.log(data.res['insertId']);
                             /*this.viewCtrl.dismiss();*/
                         });
                     }

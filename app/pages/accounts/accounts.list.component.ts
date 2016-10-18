@@ -32,7 +32,7 @@ export class AccountsListComponent {
                 if (data.res.rows.length > 0) {
                     for (var i = 0; i < data.res.rows.length; i++) {
                         let item = data.res.rows.item(i);
-                        this.accounts.push(new Account(item.id, item.sitetitle, item.username, item.password));
+                        this.accounts.push(new Account(item.id, item.siteid, item.sitetitle, item.username, item.password, this.getIcon()));
                     }
 
                 }
@@ -45,8 +45,13 @@ export class AccountsListComponent {
 
     }
 
+    editAccount(account) {
+        let modal = this.modalCtrl.create(AccountComponent, { account: account });
+        modal.present();
+
+    }
+
     deleteAccount(account:Account) {
-        console.log("delete");
         this.accountService.removeAccount(account);
 
         this.loadAccounts();
@@ -71,9 +76,13 @@ export class AccountsListComponent {
         });
     }
 
+    getIcon(): string {
+        let imgNr = Math.floor(Math.random() * 4) + 1
+        return 'build/assets/img/p' + imgNr + '.png'
+    }
+
     //
     private onPageDidEnter() {
-        console.log("page enter");
         this.loadAccounts();
     }
 }
