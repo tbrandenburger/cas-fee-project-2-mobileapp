@@ -3,6 +3,7 @@ import {NavController, NavParams, ModalController, ToastController} from 'ionic-
 import {AccountsService} from '../../providers/accounts.service';
 import {Account} from './account';
 import {AccountComponent} from './account.component';
+import {AppDataProvider} from '../../providers/app.data.provider';
 
 @Component({
     templateUrl: 'build/pages/accounts/accounts.list.component.html',
@@ -17,11 +18,11 @@ export class AccountsListComponent {
         public modalCtrl:ModalController,
         public navParams: NavParams,
         public accountService:AccountsService,
-        public toastCtrl: ToastController
+        public toastCtrl: ToastController,
+        public appDataProvider:AppDataProvider
     ) {
         // If we navigated to this page, we will have an item available as a nav param
         this.selectedItem = navParams.get('item');
-
     }
 
     loadAccounts() {
@@ -46,7 +47,7 @@ export class AccountsListComponent {
     }
 
     editAccount(account) {
-        let modal = this.modalCtrl.create(AccountComponent, { account: account });
+        let modal = this.modalCtrl.create(AccountComponent, { account: account, masterpassword: this.appDataProvider.masterPassword });
         modal.present();
 
     }

@@ -17,6 +17,7 @@ export class AccountComponent {
 
     accountFrm: FormGroup;
     account: Account;
+    masterPassword;
 
     constructor(private formBuilder: FormBuilder,
                 private appDataProvider:AppDataProvider,
@@ -25,9 +26,10 @@ export class AccountComponent {
                 private params: NavParams) {
 
         this.account = params.get('account');
+        this.masterPassword = params.get('masterpassword');
 
         //Decrypt Password
-        var bytes = CryptoJS.AES.decrypt(this.account.password.toString(), this.appDataProvider.masterPassword);
+        var bytes = CryptoJS.AES.decrypt(this.account.password.toString(), this.masterPassword);
         var decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
 
         this.accountFrm = formBuilder.group({
@@ -56,7 +58,7 @@ export class AccountComponent {
         else {
 
             // Encrypt Passwort
-            let encryptedPassword = CryptoJS.AES.encrypt(this.accountFrm.value.password, this.appDataProvider.masterPassword).toString();
+            let encryptedPassword = CryptoJS.AES.encrypt(this.accountFrm.value.password, this.masterPassword).toString();
 
             // Update Account Object
             this.account.sitetitle = this.accountFrm.value.sitetitle;

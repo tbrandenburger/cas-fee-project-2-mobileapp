@@ -7,6 +7,7 @@
 <ion-content padding class="home">
     <h5>Login at:</h5>
     <h3>{{barcodeData.sitetitle}}</h3>
+    (channel id: {{barcodeData.channelid}})<br><br>
 
     <ion-card-header>
         <div *ngIf="accountFound">Account found, you are ready to login.</div>
@@ -18,11 +19,11 @@
         <form class="list" [formGroup]="loginFrm" (ngSubmit)="login()" novalidate>
             <ion-item>
                 <ion-label floating>Username</ion-label>
-                <ion-input type="text" formControlName="username" value="{{username}}"></ion-input>
+                <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>Password</ion-label>
-                <ion-input type="password" formControlName="password"  value="{{password}}"></ion-input>
+                <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>
             </ion-item>
             <ion-buttons>
                 <button type="submit" block >Login</button>

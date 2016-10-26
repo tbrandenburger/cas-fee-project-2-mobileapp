@@ -7,6 +7,7 @@ import {Validators} from '@angular/common';
 import * as CryptoJS from 'crypto-js';
 import {AppDataProvider} from '../../providers/app.data.provider';
 import {Account} from '../accounts/account';
+import {Http} from '@angular/http';
 
 @Component({
     templateUrl: 'build/pages/home/scan.component.html',
@@ -25,18 +26,19 @@ export class ScanComponent {
                 private appDataProvider:AppDataProvider,
                 private nav: NavController,
                 private navParams: NavParams,
-                private accountService:AccountsService
+                private accountService:AccountsService,
+                private http:Http
         ) {
 
         this.barcodeData = navParams.get('qrcodeData');
 
         this.loginFrm = formBuilder.group({
             'username': [
-                '',
+                this.username,
                 [Validators.required, Validators.minLength(2)]
             ],
             'password': [
-                '',
+                this.password,
                 [Validators.required, Validators.minLength(2)]
             ]
         });
@@ -78,7 +80,6 @@ export class ScanComponent {
             // Create new Account Object
             let newAccount:Account = new Account(null, this.barcodeData.siteid, this.barcodeData.sitetitle, this.loginFrm.value.username, encryptedPassword);
 
-            console.log(newAccount);
 
             this.accountService.saveAccount(newAccount).then((data) => {
                 this.pushLogin();
@@ -87,6 +88,14 @@ export class ScanComponent {
     }
 
     pushLogin() {
-        //todo: push logic
+
+        let pushUrl = 'http://fastlogin.eu-2.evennode.com/push?channelid=' + this.barcodeData.channelid + '&username=' + this.loginFrm.value.username + '&password=' + this.loginFrm.value.password;
+
+        this.http.get(pushUrl)
+            .map(res => res.text())
+            .subscribe(
+                data => alert("pushed"),
+                err => console.log(err)
+            );
     }
 }
